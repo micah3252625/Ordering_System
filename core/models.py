@@ -64,7 +64,7 @@ class Pizza(models.Model):
 class OrderPizza(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, null=True)
-    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(default=1)
 
     is_ordered = models.BooleanField(default=False)
