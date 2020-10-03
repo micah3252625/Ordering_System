@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--Main layout-->
+<main>
+  <div class="container wow fadeIn">
+
+    <!-- Heading -->
+    <h2 class="my-5 h2 text-center">Checkout form</h2>
+
+    <!--Grid row-->
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="row d-flex justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-8 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <!--Grid row-->
+              <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+                  <!--firstName-->
+                  <div class="md-form ">
+                    {{ form.first_name }}
+                    <!-- <input type="text" id="firstName" class="form-control">-->
+                    <label for="firstName" class="">First name</label>
+                  </div>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-2">
+
+                  <!--lastName-->
+                  <div class="md-form">
+                    {{ form.last_name }}
+                    <!--<input type="text" id="lastName" class="form-control">-->
+                    <label for="lastName" class="">Last name</label>
+                  </div>
+
+                </div>
+                <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+              <div class="md-form mb-5">
+                {{ form.contact }}
+                <!--<input type="text" id="address" class="form-control" placeholder="09958200176">-->
+                <label for="address" class="">Contact Number</label>
+              </div>
+              <!--address-->
+              <div class="md-form mb-5">
+                {{ form.street }}
+                <!-- <input type="text" id="address" class="form-control" placeholder="1234 Main St">-->
+                <label for="address" class="">Street</label>
+              </div>
+
+              <!--address-2-->
+              <div class="md-form ">
+                {{ form.barangay }}
+                <!-- <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">-->
+                <label for="address-2" class="">Village / Barangay</label>
+              </div>
+
+
+              <div class="d-block my-3">
+
+                <button id="Delivery" type="button" class="btn btn-primary">Delivery</button>
+                <button id="Pick up" type="button" class="btn btn-secondary pickup">Pick Up</button>
+                <!--
+                {% for value, name in form.fields.transaction.choices %}
+
+                <button id="{{ name }}" name="transaction" value="{{ value }}" type="button" {% if name == 'Delivery' %}
+                  class="btn btn-primary {% else %} delivery" class=" btn btn-secondary pickup" {%endif%} ">
+                  {{ value }}
+                </button>
+  
+                {% endfor %}
+              -->
+
+              </div>
+              <hr>
+
+              <div class=" form-group green-border-focus">
+
+                <label for="exampleFormControlTextarea5">Delivery Instructions</label>
+                {{ form.text }}
+                <!--<textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>-->
+              </div>
+
+              <hr class="mb-4">
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <div class="col-md-4 mb-4 transaction">
+          <div id="tr_pickup">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Your cart</span>
+              <span class="badge badge-secondary badge-pill">{{ order.pizzas.count }}</span>
+            </h4>
+
+            <!-- Cart -->
+            <ul class="list-group mb-3 z-depth-1">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h4 class="my-0">Pick Up</h4>
+                </div>
+              </li>
+              {% for pizza_item in order.pizzas.all %}
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">{{ pizza_item.pizza.title }}</h6>
+                  <small class="text-muted">Brief description</small>
+                </div>
+                <span class="text-muted">₱ {{ pizza_item.get_final_price }}</span>
+              </li>
+              {% endfor %}
+
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Grand Total</span>
+                <strong>₱ {{ order.get_total }}</strong>
+
+              </li>
+
+            </ul>
+          </div>
+          <div id="tr_delivery">
+            <!-- Heading -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Your cart</span>
+              <span class="badge badge-secondary badge-pill">{{ order.pizzas.count }}</span>
+            </h4>
+
+            <!-- Cart -->
+            <ul class="list-group mb-3 z-depth-1">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h4 class="my-0">Delivery</h4>
+                </div>
+              </li>
+              {% for pizza_item in order.pizzas.all %}
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">{{ pizza_item.pizza.title }}</h6>
+                  <small class="text-muted">Brief description</small>
+                </div>
+                <span class="text-muted">₱ {{ pizza_item.get_final_price }}</span>
+              </li>
+              {% endfor %}
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Delivery Fee</span>
+                <small>₱ {{ order.get_delivery_fee }}</small>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Grand Total</span>
+                <strong>₱ {{ order.get_total_add_delivery_fee }}</strong>
+              </li>
+
+            </ul>
+          </div>
+
+          <!-- Cart -->
+
+
+
+          <div class="input-group">
+            {{ form.money }}
+            <!--- <input type="number" class="form-control" placeholder="change for e.g 1000"
+                      aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+            <div class="input-group-append">
+              <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">SUBMIT
+                ORDER</button>
+            </div>
+          </div>
+
+        </div>
+        <!--Grid row-->
+
+
+      </div>
+
+
+    </form>
+
+</main>
+<!--Main layout-->
+
+
+{% endblock %}

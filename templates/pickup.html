@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!--Main layout-->
+<main>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg mt-3 mb-5" style="background-color: #740000; color: #fff;">
+
+            <!-- Navbar brand -->
+            <span class="navbar-brand">TRANSACTION: Pick up</span>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </nav>
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-8 mb-4
+
+                    <section class=" text-center">
+                <div class="map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1980.3414993100357!2d122.0820114!3d6.9284425!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32504189bf66ecfb%3A0xbd80ba570142b7d!2s1039%203rd%20St%2C%20Zamboanga%2C%20Zamboanga%20del%20Sur!5e0!3m2!1sen!2sph!4v1601603929811!5m2!1sen!2sph"
+                        width="700" height="550" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                </div>
+                </section>
+
+
+                <!--/.Card-->
+
+
+                <!--Grid column-->
+            </div>
+
+            <!--Card-->
+
+
+            <!--Grid column-->
+            <div class="col-md-4 mb-4">
+
+                <!-- Heading -->
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill">{{ order.pizzas.count }}</span>
+                </h4>
+
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1">
+                    {% for pizza_item in order.pizzas.all %}
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{ pizza_item.pizza.title }}</h6>
+                            <small class="text-muted">Brief description</small>
+                        </div>
+                        <span class="text-muted">₱ {{ pizza_item.get_final_price }}</span>
+                    </li>
+                    {% endfor %}
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Grand Total</span>
+                        <strong>₱ {{ order.get_total }}</strong>
+
+                    </li>
+
+                </ul>
+                <!-- Cart -->
+
+
+                <!-- Promo code 
+                <form class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Redeem</button>
+                        </div>
+                    </div>
+                </form>
+                <Promo code -->
+
+                <form class="card p-2 mt-3" method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {{ money_form.number }}
+                        <!--- <input type="number" class="form-control" placeholder="change for e.g 1000"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+                        <div class="input-group-append">
+                            <button href="" class="btn btn-secondary btn-md waves-effect m-0" type="submit">SUBMIT
+                                ORDER</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+        <div class="text-center ">
+            <a onclick="window.history.go(-1); return false;" class="btn btn-primary px-5 mt-2">RETURN TO CHECKOUT</a>
+        </div>
+    </div>
+</main>
+<!--Main layout-->
+
+
+{% endblock %}

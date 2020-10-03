@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+    <div class="container">
+        <section>
+            <nav class="navbar navbar-expand-lg mt-3 mb-5" style="background-color: #740000; color: #fff;">
+
+                <!-- Navbar brand -->
+                <span class="navbar-brand">ORDER TRACKER</span>
+
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse" id="basicExampleNav">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto display-none" style="visibility: hidden;">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">All
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shirts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sport wears</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Outwears</a>
+                        </li>
+
+                    </ul>
+                    <!-- Links -->
+
+                    <form class="form-inline" style="color: #fff;">
+                        <div class="md-form my-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                                style="color: #fff;">
+                        </div>
+                    </form>
+                </div>
+                <!-- Collapsible content -->
+
+            </nav>
+
+            <div class=" mb-5 main text-center py-5">
+                <div class="main-tracker d-flex justify-content-center align-items-center align-items-center">
+                    <div class="icon">
+                        <img src="{{ STATIC_URL }}/static/img/confirm.png" alt="">
+                        <div class="icon-label">
+                            ORDER SUBMITTED
+                        </div>
+                    </div>
+                    <div class="arrow">
+                        <img src="{{ STATIC_URL }}/static/img/right-arrow.png" alt="">
+                    </div>
+                    <div class="icon">
+                        <img src="{{ STATIC_URL }}/static/img/process.png" alt="">
+                        <div class="icon-label">
+                            ORDER PROCESSING
+                        </div>
+                    </div>
+                    <div class="arrow">
+                        <img src="{{ STATIC_URL }}/static/img/right-arrow.png" alt="">
+                    </div>
+                    <div class="icon">
+                        <img src="{{ STATIC_URL }}/static/img/pizza-box.png" alt="">
+                        <div class="icon-label">
+                            ORDER PREPARING
+                        </div>
+                    </div>
+                    <div class="arrow">
+                        <img src="{{ STATIC_URL }}/static/img/right-arrow.png" alt="">
+                    </div>
+                    <div class="icon">
+                        <img src="{{ STATIC_URL }}/static/img/food-delivery.png" alt="">
+                        <div class="icon-label">
+                            ORDER ON ITS WAY
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- IF NO ORDER YET-->
+            <div class="mt-5 main text-center d-none">
+                <div class="image">
+                    <img src="{{ STATIC_URL }}/../static/MainApp/assets/img/empty.png" alt="" width="300">
+                </div>
+                <div class="text-description mt-4 ">
+                    <h1>No order yet</h1>
+                </div>
+                <div class="back-home mt-2">
+                    <a href=" "><button class="btn"
+                            style="font-size: 20pt; background-color:  #8B0C0C; color: #fff; border-radius: 50px;">Back
+                            to
+                            Home</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+
+{% endblock %}
